@@ -19,7 +19,6 @@ function App() {
           <Routes>
             <Route exact path="/signin" element={<Auth />} />
             <Route exact path="/signup" element={<SignUp />} />
-            <Route exact path="/booking" element={<BookingForm />} />
             <Route exact path="/verify" element={<UserVerification />} />
             <Route element={<PrivateRoute />}>
               <Route exact path="/booking" element={<BookingForm />} />

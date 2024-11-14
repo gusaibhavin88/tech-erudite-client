@@ -24,8 +24,9 @@ const SignUp = () => {
 
   const onComplete = (response) => {
     console.log(response, "jhyutgg");
-    toast.success(response?.data?.message);
     navigate("/signin");
+
+    toast.success(response?.data?.message);
   };
   const onError = (response) => {
     toast.error(response?.message);

@@ -22,11 +22,14 @@ const BookingForm = () => {
   const onSubmit = async (data) => {
     try {
       const response = await addBooking(data); // API call to create a booking
+
+      console.log(response);
       if (response?.data?.success) {
         toast.success("Booking created successfully!");
-        navigate("/bookings"); // Redirect to the bookings page
+        navigate("/booking"); // Redirect to the bookings page
       } else {
-        toast.error("Failed to create booking.");
+        console.log(response, "kk");
+        toast.error(response.data.message);
       }
     } catch (error) {
       toast.error("An error occurred. Please try again.");
@@ -116,7 +119,6 @@ const BookingForm = () => {
             <option value="">Select booking type</option>
             <option value="Full Day">Full Day</option>
             <option value="Half Day">Half Day</option>
-            <option value="Custom">Custom</option>
           </select>
           {errors.bookingType && (
             <p className="text-red-500 text-sm">{errors.bookingType.message}</p>
@@ -159,7 +161,7 @@ const BookingForm = () => {
             Phone Number
           </label>
           <input
-            type="text"
+            type="number"
             {...register("phone")}
             className="mt-1 p-3 border w-full rounded-md"
             placeholder="Enter phone number"

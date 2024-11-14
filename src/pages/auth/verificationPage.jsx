@@ -2,10 +2,13 @@ import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { verifyUser } from "../../api/authRequest";
+import { verifyUserAction } from "../../Redux/Auth/AuthAction";
+import { useDispatch } from "react-redux";
 
 const UserVerification = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
 
   // Function to get query parameters from the URL
   const getQueryParams = () => {
@@ -15,14 +18,25 @@ const UserVerification = () => {
     return { email, token };
   };
 
+  const onComplete = () => {};
+  const onError = () => {};
   // Function to handle verification
   const verify = async (email, token) => {
     try {
-      console.log(response, "jjjj");
-      const response = await verifyUser({
+      const data = {
         email,
         verificationToken: token,
-      });
+      };
+
+      dispatch(
+        verifyUserAction({
+          functions: {
+            onComplete: onComplete,
+            formData: data,
+            onError,
+          },
+        })
+      );
 
       console.log(response, "jjjj");
       // if (response?.data?.success) {
@@ -44,7 +58,7 @@ const UserVerification = () => {
     } else {
       toast.error("Missing verification parameters.");
     }
-  }, [location.search, navigate]); // Trigger effect when location.search changes
+  }, []); // Trigger effect when location.search changes
 
   return <div>Verifying your account...</div>; // Return some JSX to indicate process
 };
