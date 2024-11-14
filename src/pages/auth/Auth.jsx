@@ -81,6 +81,21 @@ const Auth = () => {
             {errors.password && (
               <div className="text-red-700">{errors.password.message}</div>
             )}
+            <a
+              style={{ color: "red", marginBottom: "2px", fontSize: "15px" }}
+              href="/signup"
+            >
+              <span
+                style={{
+                  color: "black",
+                  marginBottom: "2px",
+                  fontSize: "15px",
+                }}
+              >
+                Not sign up
+              </span>{" "}
+              Sign Up
+            </a>
           </div>
 
           <button

@@ -25,6 +25,7 @@ export const signupUserAction = createAsyncThunk(
 
     try {
       const response = await registerUser(formData);
+      console.log(response, "mmmm");
       onComplete(response);
       return response;
     } catch (error) {

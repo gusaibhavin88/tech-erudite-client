@@ -23,8 +23,9 @@ const SignUp = () => {
   });
 
   const onComplete = (response) => {
+    console.log(response, "jhyutgg");
     toast.success(response?.data?.message);
-    navigate("/booking");
+    navigate("/signin");
   };
   const onError = (response) => {
     toast.error(response?.message);
@@ -115,6 +116,21 @@ const SignUp = () => {
             {errors.password && (
               <div className="text-red-700">{errors.password.message}</div>
             )}
+            <a
+              style={{ color: "red", marginBottom: "2px", fontSize: "15px" }}
+              href="/signin"
+            >
+              <span
+                style={{
+                  color: "black",
+                  marginBottom: "2px",
+                  fontSize: "15px",
+                }}
+              >
+                Already sing up
+              </span>{" "}
+              Sign In
+            </a>
           </div>
 
           <button

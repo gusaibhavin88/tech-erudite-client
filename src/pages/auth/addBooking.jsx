@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { bookingSchema } from "../../validationSchemas/bookingSchema";
 import { addBooking } from "../../api/bookingRequest";
+import { persistor } from "../../Redux/Store";
 
 const BookingForm = () => {
   const navigate = useNavigate();
@@ -32,11 +33,26 @@ const BookingForm = () => {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.clear(); // Clear all data from local storage
+    persistor.purge(); // if using redux-persist
+    navigate("/signin"); // Redirect to login page (adjust the route as needed)
+  };
+
   return (
     <div className="container mx-auto p-6">
       <h2 className="text-2xl font-semibold text-center mb-6">
         Create Booking
       </h2>
+
+      <button
+        type="button"
+        onClick={handleLogout}
+        className="mt-4 p-3 bg-red-500 text-white rounded-md hover:bg-red-600"
+      >
+        Logout
+      </button>
+
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md"
